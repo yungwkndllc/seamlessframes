@@ -1,5 +1,5 @@
 export const IMAGE_URL =
-  "https://arweave.net/37oYnJGf5AkHiEhRjKidm56m7m7ApOdlBzH4H7UQBNw";
+  "https://arweave.net/VgkozyIoaTBWE7j_qiVskIUa2UfRIKc78A-F2Uu9XFY";
 export const VERCEL_URL = "https://seamlessframes.vercel.app";
 
 export const USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
