@@ -11,10 +11,13 @@ const handleRequest = frames(async (ctx) => {
     return NextResponse.error();
   }
 
+  // Convert the input text to amount of USDC (6 decimals)
+  const amount = parseFloat(ctx.message.inputText) * 1e6;
+
   const calldata = encodeFunctionData({
     abi: USDC_ABI,
     functionName: "approve",
-    args: [SEAMLESS_ADDRESS, ctx.message.inputText],
+    args: [SEAMLESS_ADDRESS, amount],
   });
 
   return transaction({
