@@ -7,17 +7,15 @@ import { ethers } from "ethers";
 import { SEAMLESS_ABI } from "./contracts/seamless";
 
 const handleRequest = frames(async (ctx) => {
-  // Get the query param of message
-  if (!ctx.message?.inputText) {
-    return NextResponse.error();
-  }
+  // Get the query param of amount
+  const amountFromQuery = ctx.query.amount;
 
   if (!ctx.message?.connectedAddress) {
     return NextResponse.error();
   }
 
   // Use ethers to pase the amount
-  const amount = ethers.parseUnits(ctx.message.inputText, 6);
+  const amount = ethers.parseUnits(amountFromQuery, 6);
 
   const calldata = encodeFunctionData({
     abi: SEAMLESS_ABI,
