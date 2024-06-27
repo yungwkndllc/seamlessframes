@@ -17,7 +17,7 @@ const handleRequest = frames(async (ctx) => {
   const calldata = encodeFunctionData({
     abi: USDC_ABI,
     functionName: "approve",
-    args: [SEAMLESS_ADDRESS, amount],
+    args: [SEAMLESS_ADDRESS, `${amount}`],
   });
 
   return transaction({
