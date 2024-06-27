@@ -1,24 +1,23 @@
 import { NextResponse } from "next/server";
 import { Abi, encodeFunctionData } from "viem";
-import { USDC_ABI } from "./contracts/seamless";
 import { USDC_ADDRESS, SEAMLESS_ADDRESS } from "@/utils";
-import { frames } from "./approve";
+import { frames } from "./supply";
 import { transaction } from "frames.js/core";
 import { ethers } from "ethers";
+import { SEAMLESS_ABI } from "./contracts/seamless";
 
 const handleRequest = frames(async (ctx) => {
-  // Get the query param of message
   if (!ctx.message?.inputText) {
     return NextResponse.error();
   }
 
   // Use ethers to pase the amount
-  const amount = ethers.parseUnits(ctx.message.inputText, 6);
+  const amount = ethers.parseEther(ctx.message?.inputText);
 
   const calldata = encodeFunctionData({
-    abi: USDC_ABI,
-    functionName: "approve",
-    args: [SEAMLESS_ADDRESS, amount],
+    abi: SEAMLESS_ABI,
+    functionName: "supply",
+    args: [USDC_ADDRESS, amount, ctx.message?.connectedAddress, 0],
   });
 
   return transaction({
@@ -26,8 +25,8 @@ const handleRequest = frames(async (ctx) => {
     method: "eth_sendTransaction",
     attribution: false,
     params: {
-      abi: USDC_ABI as Abi,
-      to: USDC_ADDRESS,
+      abi: SEAMLESS_ABI as Abi,
+      to: SEAMLESS_ADDRESS,
       data: calldata,
     },
   });
