@@ -18,7 +18,7 @@ const handleRequest = frames(async (ctx) => {
       <Button
         action="tx"
         target={{
-          pathname: `${VERCEL_URL}/seamless/lend/tx`,
+          pathname: `/tx`,
           query: { amount: ctx?.message?.inputText },
         }}
         post_url={`${VERCEL_URL}/seamless`}
