@@ -31,7 +31,7 @@ const handleRequest = frames(async (ctx) => {
       <Button
         action="tx"
         target={`${VERCEL_URL}/seamless/lend/tx`}
-        post_url="/seamless/lend"
+        post_url="/"
       >
         Lend
       </Button>,
