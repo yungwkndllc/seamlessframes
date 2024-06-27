@@ -24,6 +24,7 @@ const handleRequest = frames(async (ctx) => {
   return transaction({
     chainId: "eip155:8453",
     method: "eth_sendTransaction",
+    attribution: false,
     params: {
       abi: USDC_ABI as Abi,
       to: USDC_ADDRESS,
