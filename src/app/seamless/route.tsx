@@ -18,9 +18,9 @@ const handleRequest = frames(async (ctx) => {
     buttons.push(
       <Button
         action="link"
-        target={`https://basescan.org/tx/${ctx.message.transactionId}`}
+        target={`https://app.seamlessprotocol.com/#/?asset=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913&tab=My+Positions`}
       >
-        View on basescan
+        View your positions
       </Button>
     );
   }
