@@ -4,19 +4,23 @@ import { frames } from "./lend";
 import { IMAGE_URL, VERCEL_URL } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
+  let amountMessage = "";
+  if (ctx?.message?.inputText) {
+    amountMessage = `Lend ${ctx.message.inputText} USDC`;
+  }
+
   return {
     image: IMAGE_URL,
     imageOptions: {
       aspectRatio: "1:1",
     },
-    textInput: "How much USDC to lend?",
     buttons: [
       <Button
         action="tx"
         target={`${VERCEL_URL}/seamless/lend/tx`}
         post_url={`${VERCEL_URL}/seamless`}
       >
-        Lend
+        {amountMessage}
       </Button>,
     ],
   };
