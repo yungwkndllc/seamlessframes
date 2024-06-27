@@ -8,7 +8,7 @@ import { SEAMLESS_ABI } from "./contracts/seamless";
 
 const handleRequest = frames(async (ctx) => {
   // Get the query param of amount
-  const amountFromQuery = ctx.query.amount;
+  const amountFromQuery = ctx.searchParams.amount;
 
   if (!ctx.message?.connectedAddress) {
     return NextResponse.error();
