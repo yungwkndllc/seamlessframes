@@ -4,6 +4,7 @@ import { USDC_ABI } from "./contracts/seamless";
 import { USDC_ADDRESS, SEAMLESS_ADDRESS } from "@/utils";
 import { frames } from "./txdata";
 import { transaction } from "frames.js/core";
+import { ethers } from "ethers";
 
 const handleRequest = frames(async (ctx) => {
   // Get the query param of message
@@ -11,13 +12,13 @@ const handleRequest = frames(async (ctx) => {
     return NextResponse.error();
   }
 
-  // Convert the input text to amount of USDC (6 decimals)
-  const amount = parseFloat(ctx.message.inputText) * 1e6;
+  // Use ethers to pase the amount
+  const amount = ethers.parseUnits(ctx.message.inputText, 6);
 
   const calldata = encodeFunctionData({
     abi: USDC_ABI,
     functionName: "approve",
-    args: [SEAMLESS_ADDRESS, `${amount}`],
+    args: [SEAMLESS_ADDRESS, amount],
   });
 
   return transaction({
