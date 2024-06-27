@@ -6,7 +6,7 @@ import { IMAGE_URL, VERCEL_URL } from "@/utils";
 const handleRequest = frames(async (ctx) => {
   let amountMessage = "";
   if (ctx?.message?.inputText) {
-    amountMessage = `Lend ${ctx.message.inputText} USDC`;
+    amountMessage = `Supply ${ctx.message.inputText} wstETH`;
   }
 
   return {
