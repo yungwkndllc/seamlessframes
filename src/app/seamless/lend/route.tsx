@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "frames.js/next";
-import { frames } from "./seamless";
+import { frames } from "./lend";
 import { IMAGE_URL, VERCEL_URL } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
@@ -30,10 +30,10 @@ const handleRequest = frames(async (ctx) => {
     buttons: [
       <Button
         action="tx"
-        target={`${VERCEL_URL}/seamless/approve`}
+        target={`${VERCEL_URL}/seamless/lend/tx`}
         post_url="/seamless/lend"
       >
-        Approve USDC
+        Lend
       </Button>,
     ],
   };
