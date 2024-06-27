@@ -1,13 +1,19 @@
 export const SEAMLESS_ABI = [
   {
+    inputs: [{ internalType: "uint256", name: "assets", type: "uint256" }],
+    name: "convertToShares",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+
+  {
     inputs: [
-      { internalType: "address", name: "asset", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-      { internalType: "address", name: "onBehalfOf", type: "address" },
-      { internalType: "uint16", name: "referralCode", type: "uint16" },
+      { internalType: "uint256", name: "assets", type: "uint256" },
+      { internalType: "address", name: "receiver", type: "address" },
     ],
-    name: "supply",
-    outputs: [],
+    name: "deposit",
+    outputs: [{ internalType: "uint256", name: "shares", type: "uint256" }],
     stateMutability: "nonpayable",
     type: "function",
   },
