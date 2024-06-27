@@ -1,34 +1,32 @@
-import { TransactionTargetResponse } from "frames.js";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Abi, encodeFunctionData } from "viem";
-import { SEAMLESS_ABI } from "./contracts/seamless";
-import { SEAMLESS_ADDRESS } from "@/utils";
-import { ethers } from "ethers";
+import { USDC_ABI } from "./contracts/seamless";
+import { USDC_ADDRESS, SEAMLESS_ADDRESS } from "@/utils";
+import { frames } from "./txdata";
+import { transaction } from "frames.js/core";
 
-export async function POST(
-  req: NextRequest
-): Promise<NextResponse<TransactionTargetResponse>> {
-  // Get amount from req.url.searchParams
-  const reqURL = new URL(req.url);
-  const amount = reqURL.searchParams.get("amount") || 1;
-
-  const baseCost = ethers.parseEther("0.00069");
-  const totalCost = baseCost * BigInt(amount);
+const handleRequest = frames(async (ctx) => {
+  // Get the query param of message
+  if (!ctx.message?.inputText) {
+    return NextResponse.error();
+  }
 
   const calldata = encodeFunctionData({
-    abi: SEAMLESS_ABI,
-    functionName: "higherMint",
-    args: [BigInt(amount)],
+    abi: USDC_ABI,
+    functionName: "approve",
+    args: [SEAMLESS_ADDRESS, ctx.message.inputText],
   });
 
-  return NextResponse.json({
+  return transaction({
     chainId: "eip155:8453",
     method: "eth_sendTransaction",
     params: {
-      abi: SEAMLESS_ABI as Abi,
-      to: SEAMLESS_ADDRESS,
+      abi: USDC_ABI as Abi,
+      to: USDC_ADDRESS,
       data: calldata,
-      value: totalCost.toString(),
     },
   });
-}
+});
+
+export const GET = handleRequest;
+export const POST = handleRequest;

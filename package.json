@@ -14,7 +14,7 @@
     "@rainbow-me/rainbowkit": "^2.0.5",
     "@tanstack/react-query": "^5.28.14",
     "ethers": "^6.11.1",
-    "frames.js": "^0.11.3",
+    "frames.js": "^0.17.1",
     "lodash.merge": "^4.6.2",
     "next": "14.1.4",
     "react": "^18",

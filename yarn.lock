@@ -2937,10 +2937,10 @@ fraction.js@^4.3.7:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.7.tgz#06ca0085157e42fda7f9e726e79fefc4068840f7"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
-frames.js@^0.11.3:
-  version "0.11.4"
-  resolved "https://registry.yarnpkg.com/frames.js/-/frames.js-0.11.4.tgz#9a7b32afafe902f2a14779882753a585e1056a5f"
-  integrity sha512-iRLKcgIGCzCiuYAZ9b/bKA6mN7uUESFbUvVhzs/+vxBFkjsMseVwetLG6ze9eBsKmzHTat+r6ttUv02OfguHlQ==
+frames.js@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/frames.js/-/frames.js-0.17.1.tgz#e5029eb0eb914e928cd0965d264c9550a5d56136"
+  integrity sha512-aCkxFSCx4jnaLyiIoAaPir3XUbxZRYcHonGt+VGzArOz6pnOjue3TM0v45YNIjrmJ+4Gw3Wplgx7em2xo8JuTw==
   dependencies:
     "@vercel/og" "^0.6.2"
     cheerio "^1.0.0-rc.12"
