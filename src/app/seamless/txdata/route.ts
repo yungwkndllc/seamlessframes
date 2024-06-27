@@ -1,7 +1,7 @@
 import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import { Abi, encodeFunctionData } from "viem";
-import { higherABI } from "./contracts/seamless";
+import { SEAMLESS_ABI } from "./contracts/seamless";
 import { SEAMLESS_ADDRESS } from "@/utils";
 import { ethers } from "ethers";
 
@@ -16,7 +16,7 @@ export async function POST(
   const totalCost = baseCost * BigInt(amount);
 
   const calldata = encodeFunctionData({
-    abi: higherABI,
+    abi: SEAMLESS_ABI,
     functionName: "higherMint",
     args: [BigInt(amount)],
   });
@@ -25,7 +25,7 @@ export async function POST(
     chainId: "eip155:8453",
     method: "eth_sendTransaction",
     params: {
-      abi: higherABI as Abi,
+      abi: SEAMLESS_ABI as Abi,
       to: SEAMLESS_ADDRESS,
       data: calldata,
       value: totalCost.toString(),
