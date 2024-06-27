@@ -26,7 +26,7 @@ const handleRequest = frames(async (ctx) => {
     imageOptions: {
       aspectRatio: "1:1",
     },
-    textInput: "How much USDC would you like to lend?",
+    textInput: "How much USDC to lend?",
     buttons: [
       <Button
         action="tx"
