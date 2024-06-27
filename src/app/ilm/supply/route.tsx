@@ -1,35 +1,32 @@
-import { NextResponse } from "next/server";
-import { Abi, encodeFunctionData } from "viem";
-import { USDC_ADDRESS, SEAMLESS_ADDRESS } from "@/utils";
+/* eslint-disable react/jsx-key */
+import { Button } from "frames.js/next";
 import { frames } from "./supply";
-import { transaction } from "frames.js/core";
-import { ethers } from "ethers";
-import { SEAMLESS_ABI } from "./contracts/seamless";
+import { IMAGE_URL, VERCEL_URL } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
-  if (!ctx.message?.inputText) {
-    return NextResponse.error();
+  let amountMessage = "";
+  if (ctx?.message?.inputText) {
+    amountMessage = `Lend ${ctx.message.inputText} USDC`;
   }
 
-  // Use ethers to pase the amount
-  const amount = ethers.parseEther(ctx.message?.inputText);
-
-  const calldata = encodeFunctionData({
-    abi: SEAMLESS_ABI,
-    functionName: "supply",
-    args: [USDC_ADDRESS, amount, ctx.message?.connectedAddress, 0],
-  });
-
-  return transaction({
-    chainId: "eip155:8453",
-    method: "eth_sendTransaction",
-    attribution: false,
-    params: {
-      abi: SEAMLESS_ABI as Abi,
-      to: SEAMLESS_ADDRESS,
-      data: calldata,
+  return {
+    image: IMAGE_URL,
+    imageOptions: {
+      aspectRatio: "1.91:1",
     },
-  });
+    buttons: [
+      <Button
+        action="tx"
+        target={{
+          pathname: `/tx`,
+          query: { amount: ctx?.message?.inputText },
+        }}
+        post_url={`${VERCEL_URL}/ilm`}
+      >
+        {amountMessage}
+      </Button>,
+    ],
+  };
 });
 
 export const GET = handleRequest;
