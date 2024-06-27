@@ -12,7 +12,7 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: IMAGE_URL,
     imageOptions: {
-      aspectRatio: "1:1",
+      aspectRatio: "1.91:1",
     },
     buttons: [
       <Button
