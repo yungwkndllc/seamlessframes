@@ -25,7 +25,6 @@ const handleRequest = frames(async (ctx) => {
   const calldata = encodeFunctionData({
     abi: WRAPPER_ABI,
     functionName: "supply",
-    args: [],
   });
 
   console.log("Calldata", calldata);
@@ -37,7 +36,7 @@ const handleRequest = frames(async (ctx) => {
       abi: WRAPPER_ABI as Abi,
       to: WRAPPER_ADDRESS,
       data: calldata,
-      value: ethers.formatEther(amount),
+      value: amount.toString(),
     },
   });
 });
