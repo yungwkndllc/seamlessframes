@@ -7,10 +7,7 @@ import { ethers } from "ethers";
 import { WRAPPER_ABI } from "./contracts/wrapper";
 
 const handleRequest = frames(async (ctx) => {
-  let amountMessage = "";
-  if (ctx?.message?.inputText) {
-    amountMessage = `Supply ${ctx.message.inputText} wstETH`;
-  } else {
+  if (!ctx?.message?.inputText) {
     return NextResponse.error();
   }
 
