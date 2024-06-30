@@ -8,15 +8,19 @@ import { WRAPPER_ABI } from "./contracts/wrapper";
 
 const handleRequest = frames(async (ctx) => {
   if (!ctx?.message?.inputText) {
+    console.log("No input text");
     return NextResponse.error();
   }
 
   if (!ctx.message?.connectedAddress) {
+    console.log("No connected address");
     return NextResponse.error();
   }
 
   // Use ethers to pase the amount
   const amount = ethers.parseEther(ctx.message.inputText);
+
+  console.log("Amount", amount.toString());
 
   const calldata = encodeFunctionData({
     abi: WRAPPER_ABI,
@@ -24,6 +28,7 @@ const handleRequest = frames(async (ctx) => {
     args: [],
   });
 
+  console.log("Calldata", calldata);
   return transaction({
     chainId: "eip155:8453",
     method: "eth_sendTransaction",
