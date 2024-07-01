@@ -41,7 +41,6 @@ const handleRequest = frames(async (ctx) => {
       abi: SEAMLESS_ABI as Abi,
       to: SEAMLESS_ILM_ADDRESS,
       data: calldata,
-      value: amount.toString(),
     },
   });
 });
