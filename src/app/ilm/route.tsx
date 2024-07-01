@@ -8,6 +8,9 @@ const handleRequest = frames(async (ctx) => {
     <Button action="tx" target={`${VERCEL_URL}/ilm/supply/tx`} post_url="/">
       Supply ETH
     </Button>,
+    <Button action="tx" target={`${VERCEL_URL}/ilm/withdraw/tx`} post_url="/">
+      Withdraw ETH
+    </Button>,
   ];
 
   if (ctx.message?.transactionId) {
@@ -21,12 +24,14 @@ const handleRequest = frames(async (ctx) => {
     );
   }
 
+  // Let's construct an image with the current APY
+
   return {
     image: IMAGE_URL,
     imageOptions: {
       aspectRatio: "1.91:1",
     },
-    textInput: "How much wstETH to supply?",
+    textInput: "How much wstETH?",
     buttons: buttons,
   };
 });
