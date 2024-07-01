@@ -9,7 +9,7 @@ const handleRequest = frames(async (ctx) => {
       Supply ETH
     </Button>,
     <Button action="tx" target={`${VERCEL_URL}/ilm/withdraw/tx`} post_url="/">
-      Withdraw ETH
+      Withdraw wstETH
     </Button>,
   ];
 
