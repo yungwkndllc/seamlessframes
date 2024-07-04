@@ -105,7 +105,7 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div
-        tw="flex justify-center items-center w-full h-full text-black"
+        tw="relative flex justify-center items-end w-full h-full text-black"
         style={{
           backgroundImage: `url('${IMAGE_URL}')`,
           backgroundSize: "100% 100%",
@@ -113,7 +113,7 @@ const handleRequest = frames(async (ctx) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div tw="flex p-4 rounded-lg shadow-lg transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
+        <div tw="absolute bottom-4 flex p-4 rounded-lg shadow-lg transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
           {strategyAPY}% APY with wstETH Boost
         </div>
       </div>
