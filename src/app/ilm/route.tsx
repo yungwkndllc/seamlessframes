@@ -113,7 +113,7 @@ const handleRequest = frames(async (ctx) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div tw="absolute bottom-4 flex p-4 rounded-lg shadow-lg transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
+        <div tw="absolute bottom-4 text-xl flex p-4 rounded-lg shadow-lg transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
           {strategyAPY}% APY with wstETH Boost
         </div>
       </div>
