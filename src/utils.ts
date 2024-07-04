@@ -245,44 +245,6 @@ export const metadataQueryConfig = {
   staleTime: Infinity,
 };
 
-export function useSeamlessContractRead<
-  const TAbi extends Abi | readonly unknown[],
-  TFunctionName extends ContractFunctionName<TAbi, "pure" | "view">,
-  TArgs extends ContractFunctionArgs<TAbi, "pure" | "view", TFunctionName>,
-  config extends Config = ResolvedRegister["config"],
-  selectData = ReadContractData<TAbi, TFunctionName, TArgs>
->(
-  parameters = {} as UseReadContractParameters<
-    TAbi,
-    TFunctionName,
-    TArgs,
-    config,
-    selectData
-  >
-) {
-  // ************* //
-  // Read contract //
-  // ************* //
-  const result = useReadContract({ ...parameters });
-
-  return {
-    ...result,
-  };
-}
-
-export const useFetchStrategyAssets = (strategy?: Address) => {
-  console.log("ayooo");
-  return useSeamlessContractRead({
-    address: strategy,
-    abi: loopStrategyAbi,
-    functionName: "getAssets",
-    query: {
-      ...metadataQueryConfig,
-      enabled: !!strategy,
-    },
-  });
-};
-
 export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
   console.log("here!");
   const block: Block = await getBlock(config);
@@ -295,8 +257,12 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
     blockNumber,
   });
 
-  const { data: strategyAssets, ...strategyAssetsRest } =
-    useFetchStrategyAssets(strategy);
+  const strategyAssets = await readContract(config, {
+    address: strategy,
+    abi: loopStrategyAbi,
+    functionName: "getAssets",
+    code: "0xabcd",
+  });
 
   const result = await fetchStrategyApyQueryOptions({
     strategy,
