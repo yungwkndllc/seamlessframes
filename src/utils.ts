@@ -21,7 +21,7 @@ export const SEAMLESS_ILM_ADDRESS =
 
 export const WRAPPER_ADDRESS = "0xC3812E7c09BE98eF892a0E190F5b62dAd3dfc92C";
 
-export const STRATEGY_ADDRESS = "0xc82a728429f112e85c827c7c8734c9210c3cf8ea";
+export const STRATEGY_ADDRESS = "0x258730e23cF2f25887Cb962d32Bd10b878ea8a4e";
 export const SECONDS_PER_YEAR = 60 * 60 * 24 * 365;
 export const COMPOUNDING_PERIODS_APY = 1;
 export const ONE_USD = BigInt(10 ** 8);
