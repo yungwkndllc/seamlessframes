@@ -127,7 +127,6 @@ const handleRequest = frames(async (ctx) => {
           </pattern>
         </defs>
         <rect width="191" height="100" fill="url(#bg)" />
-        {convertTextToPath(textElementString)}
       </svg>
     ),
     imageOptions: {
