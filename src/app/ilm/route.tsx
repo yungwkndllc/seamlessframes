@@ -1,9 +1,17 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "frames.js/next";
 import { frames } from "./ilm";
-import { IMAGE_URL, VERCEL_URL } from "@/utils";
+import {
+  IMAGE_URL,
+  STRATEGY_ADDRESS,
+  useFetchStrategyApy,
+  VERCEL_URL,
+} from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
+  const strategyAPY = useFetchStrategyApy(STRATEGY_ADDRESS);
+  console.log("strategyAPY", strategyAPY);
+
   let buttons = [
     <Button action="tx" target={`${VERCEL_URL}/ilm/supply/tx`} post_url="/">
       Supply ETH
