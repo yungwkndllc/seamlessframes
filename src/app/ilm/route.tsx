@@ -108,7 +108,7 @@ const handleRequest = frames(async (ctx) => {
         tw="flex justify-center items-center w-full h-full text-white"
         style={{
           backgroundImage: `url('${IMAGE_URL}')`,
-          backgroundSize: "191px 100px",
+          backgroundSize: "100% auto",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
