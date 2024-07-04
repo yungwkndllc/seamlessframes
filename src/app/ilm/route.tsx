@@ -9,8 +9,12 @@ import {
 } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
-  const strategyAPY = await useFetchStrategyApy(STRATEGY_ADDRESS);
-  console.log("strategyAPY", strategyAPY);
+  try {
+    const strategyAPY = await useFetchStrategyApy(STRATEGY_ADDRESS);
+    console.log("strategyAPY", strategyAPY);
+  } catch (e) {
+    console.error(e);
+  }
 
   let buttons = [
     <Button action="tx" target={`${VERCEL_URL}/ilm/supply/tx`} post_url="/">
