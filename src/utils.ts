@@ -257,6 +257,8 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
     blockNumber,
   });
 
+  console.log("fff");
+
   const strategyAssets = await readContract(config, {
     address: strategy,
     abi: loopStrategyAbi,
@@ -264,6 +266,7 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
     code: "0xabcd",
   });
 
+  console.log("yoo");
   const result = await fetchStrategyApyQueryOptions({
     strategy,
     latestBlockData: block,
