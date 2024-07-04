@@ -9,9 +9,11 @@ import {
 } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
+  let strategyAPY = 0;
   try {
-    const strategyAPY = await useFetchStrategyApy(STRATEGY_ADDRESS);
+    const strategyAPYRes = await useFetchStrategyApy(STRATEGY_ADDRESS);
     console.log("strategyAPY", strategyAPY);
+    strategyAPY = strategyAPYRes.data.value.toFixed(2);
   } catch (e) {
     console.error(e);
   }
@@ -39,7 +41,57 @@ const handleRequest = frames(async (ctx) => {
   // Let's construct an image with the current APY
 
   return {
-    image: IMAGE_URL,
+    image: (
+      <svg
+        width="191"
+        height="100"
+        viewBox="0 0 191 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            id="bg"
+            patternUnits="userSpaceOnUse"
+            width="191"
+            height="100"
+          >
+            <image
+              href="https://arweave.net/VgkozyIoaTBWE7j_qiVskIUa2UfRIKc78A-F2Uu9XFY"
+              x="0"
+              y="0"
+              width="191"
+              height="100"
+            />
+          </pattern>
+        </defs>
+        <rect width="191" height="100" fill="url(#bg)" />
+
+        <text
+          x="50%"
+          y="20%"
+          font-family="Arial, sans-serif"
+          font-size="24"
+          fill="#6d9b30"
+          text-anchor="middle"
+          alignment-baseline="middle"
+          font-weight="bold"
+        >
+          {strategyAPY}% APY
+        </text>
+
+        <text
+          x="50%"
+          y="85%"
+          font-family="Arial, sans-serif"
+          font-size="14"
+          fill="#6d9b30"
+          text-anchor="middle"
+          alignment-baseline="middle"
+        >
+          Boost wstETH
+        </text>
+      </svg>
+    ),
     imageOptions: {
       aspectRatio: "1.91:1",
     },
