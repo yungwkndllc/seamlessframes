@@ -271,6 +271,7 @@ export function useSeamlessContractRead<
 }
 
 export const useFetchStrategyAssets = (strategy?: Address) => {
+  console.log("ayooo");
   return useSeamlessContractRead({
     address: strategy,
     abi: loopStrategyAbi,
@@ -283,7 +284,9 @@ export const useFetchStrategyAssets = (strategy?: Address) => {
 };
 
 export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
+  console.log("here!");
   const { data: latestBlockData, ...latestBlockRest } = useBlock();
+  console.log("here2");
 
   const enabled = !!latestBlockData?.number;
   const blockNumber = enabled
