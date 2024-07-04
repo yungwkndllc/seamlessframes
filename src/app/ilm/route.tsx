@@ -104,35 +104,8 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        <svg
-          width="191"
-          height="100"
-          viewBox="0 0 191 100"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="bg"
-              patternUnits="userSpaceOnUse"
-              width="191"
-              height="100"
-            >
-              <image
-                href="https://arweave.net/VgkozyIoaTBWE7j_qiVskIUa2UfRIKc78A-F2Uu9XFY"
-                x="0"
-                y="0"
-                width="191"
-                height="100"
-              />
-            </pattern>
-          </defs>
-          <rect width="191" height="100" fill="url(#bg)" />
-        </svg>
+      <div tw="bg-purple-800 text-white w-full h-full justify-center items-center flex">
+        {strategyAPY}% APY with wstETH Boost
       </div>
     ),
     imageOptions: {
