@@ -87,15 +87,40 @@ export const fetchAssetPriceInBlock = async (
 ): Promise<bigint | undefined> => {
   if (!asset) return undefined;
 
+  let strategy = "";
+  if (asset == STRATEGY_ADDRESS) {
+    strategy = "strategy";
+  }
+
   let price = BigInt(0);
 
-  price = await readContract(config, {
-    address: aaveOracleAddress,
-    abi: aaveOracleAbi,
-    functionName: "getAssetPrice",
-    args: [asset],
-    blockNumber,
-  });
+  if (strategy) {
+    const equityUsd = await readContract(config, {
+      address: asset,
+      abi: loopStrategyAbi,
+      functionName: "equityUSD",
+      blockNumber,
+    });
+
+    const totalSupply = await readContract(config, {
+      address: asset,
+      abi: erc20Abi,
+      functionName: "totalSupply",
+      blockNumber,
+    });
+
+    if (totalSupply !== BigInt(0)) {
+      price = (equityUsd * ONE_ETHER) / totalSupply;
+    }
+  } else {
+    price = await readContract(config, {
+      address: aaveOracleAddress,
+      abi: aaveOracleAbi,
+      functionName: "getAssetPrice",
+      args: [asset],
+      blockNumber,
+    });
+  }
 
   if (underlyingAsset) {
     const underlyingPrice = await fetchAssetPriceInBlock(
