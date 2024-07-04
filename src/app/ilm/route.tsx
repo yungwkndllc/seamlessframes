@@ -104,8 +104,18 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw="bg-purple-800 text-white w-full h-full justify-center items-center flex">
-        {strategyAPY}% APY with wstETH Boost
+      <div
+        tw="relative flex justify-center items-center w-full h-full text-white"
+        style={{
+          backgroundImage: `url('${IMAGE_URL}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div tw="bg-purple-800 bg-opacity-75 p-4 rounded-lg shadow-lg transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
+          {strategyAPY}% APY with wstETH Boost
+        </div>
       </div>
     ),
     imageOptions: {
