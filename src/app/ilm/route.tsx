@@ -8,9 +8,9 @@ import {
   VERCEL_URL,
 } from "@/utils";
 
-function convertTextToPath(textElementString: string) {
-  // Regular expression to extract attributes
-  const regex = /<text(?:\s+(?:[\w-]+="[^"]*"\s*)*)?>([^<]*)<\/text>/;
+function convertTextToPath(textElementString: string): string {
+  // Regular expression to extract attributes and text content
+  const regex = /<text\s+([^>]*)>([\s\S]*?)<\/text>/;
   const match = textElementString.match(regex);
 
   if (!match) {
@@ -18,23 +18,21 @@ function convertTextToPath(textElementString: string) {
   }
 
   // Extract attributes and text content
-  const attributes = match[1];
+  const attributesString = match[1].trim();
   const textContent = match[2].trim();
 
   // Parse attributes
   const attrsRegex = /(\w+)=["']([^"']+)["']/g;
   let attrMatch;
-  const parsedAttributes = {};
+  const parsedAttributes: Record<string, string> = {};
 
-  while ((attrMatch = attrsRegex.exec(attributes)) !== null) {
+  while ((attrMatch = attrsRegex.exec(attributesString)) !== null) {
     const [, name, value] = attrMatch;
-    // @ts-ignore
     parsedAttributes[name] = value;
   }
 
   // Construct path element string
   const pathElementString = `<path d="M0,0" fill="${
-    // @ts-ignore
     parsedAttributes.fill || "black"
   }">${textContent}</path>`;
 
