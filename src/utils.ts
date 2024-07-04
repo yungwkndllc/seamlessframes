@@ -1,7 +1,7 @@
 import { Address, Block, erc20Abi, formatUnits } from "viem";
 import { Config, createConfig, http, useBlock } from "wagmi";
 import { getBlock, readContract } from "wagmi/actions";
-import { loopStrategyAbi } from "./abis";
+import { aaveOracleAbi, loopStrategyAbi } from "./abis";
 import { base } from "viem/chains";
 import { queryOptions } from "@tanstack/react-query";
 import { UseQueryResult, QueryKey } from "@tanstack/react-query";
@@ -76,6 +76,9 @@ export const config = createConfig({
   },
 });
 
+export const aaveOracleAddress =
+  "0xFDd4e83890BCcd1fbF9b10d71a5cc0a738753b01" as const;
+
 export const fetchAssetPriceInBlock = async (
   config: Config,
   asset?: Address,
@@ -86,23 +89,13 @@ export const fetchAssetPriceInBlock = async (
 
   let price = BigInt(0);
 
-  const equityUsd = await readContract(config, {
-    address: asset,
-    abi: loopStrategyAbi,
-    functionName: "equityUSD",
+  price = await readContract(config, {
+    address: aaveOracleAddress,
+    abi: aaveOracleAbi,
+    functionName: "getAssetPrice",
+    args: [asset],
     blockNumber,
   });
-
-  const totalSupply = await readContract(config, {
-    address: asset,
-    abi: erc20Abi,
-    functionName: "totalSupply",
-    blockNumber,
-  });
-
-  if (totalSupply !== BigInt(0)) {
-    price = (equityUsd * ONE_ETHER) / totalSupply;
-  }
 
   if (underlyingAsset) {
     const underlyingPrice = await fetchAssetPriceInBlock(

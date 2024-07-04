@@ -1140,3 +1140,147 @@ export const loopStrategyAbi = [
   },
   { type: "error", inputs: [], name: "WithdrawDisabled" },
 ] as const;
+
+export const aaveOracleAbi = [
+  {
+    type: "constructor",
+    inputs: [
+      {
+        name: "provider",
+        internalType: "contract IPoolAddressesProvider",
+        type: "address",
+      },
+      { name: "assets", internalType: "address[]", type: "address[]" },
+      { name: "sources", internalType: "address[]", type: "address[]" },
+      { name: "fallbackOracle", internalType: "address", type: "address" },
+      { name: "baseCurrency", internalType: "address", type: "address" },
+      { name: "baseCurrencyUnit", internalType: "uint256", type: "uint256" },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    anonymous: false,
+    inputs: [
+      {
+        name: "asset",
+        internalType: "address",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "source",
+        internalType: "address",
+        type: "address",
+        indexed: true,
+      },
+    ],
+    name: "AssetSourceUpdated",
+  },
+  {
+    type: "event",
+    anonymous: false,
+    inputs: [
+      {
+        name: "baseCurrency",
+        internalType: "address",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "baseCurrencyUnit",
+        internalType: "uint256",
+        type: "uint256",
+        indexed: false,
+      },
+    ],
+    name: "BaseCurrencySet",
+  },
+  {
+    type: "event",
+    anonymous: false,
+    inputs: [
+      {
+        name: "fallbackOracle",
+        internalType: "address",
+        type: "address",
+        indexed: true,
+      },
+    ],
+    name: "FallbackOracleUpdated",
+  },
+  {
+    type: "function",
+    inputs: [],
+    name: "ADDRESSES_PROVIDER",
+    outputs: [
+      {
+        name: "",
+        internalType: "contract IPoolAddressesProvider",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [],
+    name: "BASE_CURRENCY",
+    outputs: [{ name: "", internalType: "address", type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [],
+    name: "BASE_CURRENCY_UNIT",
+    outputs: [{ name: "", internalType: "uint256", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [{ name: "asset", internalType: "address", type: "address" }],
+    name: "getAssetPrice",
+    outputs: [{ name: "", internalType: "uint256", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [{ name: "assets", internalType: "address[]", type: "address[]" }],
+    name: "getAssetsPrices",
+    outputs: [{ name: "", internalType: "uint256[]", type: "uint256[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [],
+    name: "getFallbackOracle",
+    outputs: [{ name: "", internalType: "address", type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [{ name: "asset", internalType: "address", type: "address" }],
+    name: "getSourceOfAsset",
+    outputs: [{ name: "", internalType: "address", type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    inputs: [
+      { name: "assets", internalType: "address[]", type: "address[]" },
+      { name: "sources", internalType: "address[]", type: "address[]" },
+    ],
+    name: "setAssetSources",
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    inputs: [
+      { name: "fallbackOracle", internalType: "address", type: "address" },
+    ],
+    name: "setFallbackOracle",
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+] as const;
