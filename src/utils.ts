@@ -258,7 +258,12 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
   });
 
   console.log("yoo");
-  const result = fetchStrategyApy(strategy!, block, block2, strategyAssets);
+  const result = await fetchStrategyApy(
+    strategy!,
+    block,
+    block2,
+    strategyAssets
+  );
 
   return {
     data: {
