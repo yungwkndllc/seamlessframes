@@ -257,7 +257,8 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
     functionName: "getAssets",
   });
 
-  console.log("yoo");
+  console.log("yoo", strategyAssets);
+  console.log("ayo", strategy);
   const result = await fetchStrategyApy(
     strategy!,
     block,
