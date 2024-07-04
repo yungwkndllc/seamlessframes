@@ -3,16 +3,8 @@ import { Config, createConfig, http, useBlock } from "wagmi";
 import { getBlock, readContract } from "wagmi/actions";
 import { loopStrategyAbi } from "./abis";
 import { base } from "viem/chains";
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
 import { UseQueryResult, QueryKey } from "@tanstack/react-query";
-
-import { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
-import {
-  ResolvedRegister,
-  UseReadContractParameters,
-  useReadContract,
-} from "wagmi";
-import { ReadContractData } from "wagmi/query";
 
 export const APY_BLOCK_FRAME =
   ((BigInt(60) * BigInt(60) * BigInt(24)) / BigInt(2)) * BigInt(30); // 30 days
@@ -260,10 +252,9 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
   console.log("fff");
 
   const strategyAssets = await readContract(config, {
-    address: strategy,
+    address: STRATEGY_ADDRESS,
     abi: loopStrategyAbi,
     functionName: "getAssets",
-    code: "0xabcd",
   });
 
   console.log("yoo");
