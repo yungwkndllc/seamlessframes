@@ -104,7 +104,11 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
         <svg
           width="191"
           height="100"
