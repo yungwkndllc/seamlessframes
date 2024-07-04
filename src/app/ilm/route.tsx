@@ -9,7 +9,7 @@ import {
 } from "@/utils";
 
 const handleRequest = frames(async (ctx) => {
-  const strategyAPY = useFetchStrategyApy(STRATEGY_ADDRESS);
+  const strategyAPY = await useFetchStrategyApy(STRATEGY_ADDRESS);
   console.log("strategyAPY", strategyAPY);
 
   let buttons = [

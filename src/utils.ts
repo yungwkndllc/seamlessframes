@@ -282,9 +282,7 @@ export const useFetchStrategyAssets = (strategy?: Address) => {
   });
 };
 
-export const useFetchStrategyApy = (
-  strategy?: Address
-): FetchData<FetchNumber> => {
+export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
   const { data: latestBlockData, ...latestBlockRest } = useBlock();
 
   const enabled = !!latestBlockData?.number;
@@ -300,24 +298,16 @@ export const useFetchStrategyApy = (
   const { data: strategyAssets, ...strategyAssetsRest } =
     useFetchStrategyAssets(strategy);
 
-  const result = useQuery(
-    fetchStrategyApyQueryOptions({
-      strategy,
-      latestBlockData,
-      prevBlockData,
-      assetsData: strategyAssets,
-    })
-  );
+  const result = await fetchStrategyApyQueryOptions({
+    strategy,
+    latestBlockData,
+    prevBlockData,
+    assetsData: strategyAssets,
+  });
 
   return {
-    ...mergeQueryStates([
-      latestBlockRest,
-      prevBlockRest,
-      strategyAssetsRest,
-      result,
-    ]),
     data: {
-      value: result.data,
+      value: result,
       symbol: "%",
     },
   };
@@ -409,11 +399,3 @@ export function formatFetchNumberToViewNumber(
     symbol: fetchNumber.symbol,
   };
 }
-
-export const useFetchViewStrategyApy = (
-  strategy?: Address
-): Displayable<ViewNumber> => {
-  const { data, ...rest } = useFetchStrategyApy(strategy);
-
-  return { ...rest, data: formatFetchNumberToViewNumber(data) };
-};
