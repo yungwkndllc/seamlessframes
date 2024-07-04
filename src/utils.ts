@@ -1,6 +1,6 @@
-import { Address, erc20Abi, formatUnits } from "viem";
+import { Address, Block, erc20Abi, formatUnits } from "viem";
 import { Config, createConfig, http, useBlock } from "wagmi";
-import { readContract } from "wagmi/actions";
+import { getBlock, readContract } from "wagmi/actions";
 import { loopStrategyAbi } from "./abis";
 import { base } from "viem/chains";
 import { queryOptions, useQuery } from "@tanstack/react-query";
@@ -285,16 +285,13 @@ export const useFetchStrategyAssets = (strategy?: Address) => {
 
 export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
   console.log("here!");
-  const { data: latestBlockData, ...latestBlockRest } = useBlock();
+  const block: Block = await getBlock(config);
   console.log("here2");
 
-  const enabled = !!latestBlockData?.number;
-  const blockNumber = enabled
-    ? latestBlockData.number - APY_BLOCK_FRAME
-    : undefined;
+  const enabled = !!block?.number;
+  const blockNumber = enabled ? block.number! - APY_BLOCK_FRAME : undefined;
 
-  const { data: prevBlockData, ...prevBlockRest } = useBlock({
-    query: { enabled },
+  const block2: Block = await getBlock(config, {
     blockNumber,
   });
 
@@ -303,8 +300,8 @@ export const useFetchStrategyApy = async (strategy?: Address): Promise<any> => {
 
   const result = await fetchStrategyApyQueryOptions({
     strategy,
-    latestBlockData,
-    prevBlockData,
+    latestBlockData: block,
+    prevBlockData: block2,
     assetsData: strategyAssets,
   });
 
